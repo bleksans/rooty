@@ -3,24 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
- <meta name="virtual-protocol-site-verification" content="b8d21b9fa200615ff7eb7736e45e5d2b" />
-<title>Rooty | MARKET</title>
-<meta name="description" content="Your control room for shipping tokens and artwork on Solana.">
+<meta name="virtual-protocol-site-verification" content="b8d21b9fa200615ff7eb7736e45e5d2b" />
+<title>Rooty | Robinhood Chain MARKET</title>
+<meta name="description" content="Your control room for shipping tokens and artwork on Robinhood Chain L2.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0B0B12;
-    --surface:#16151F;
-    --surface-2:#1D1C29;
-    --line: rgba(243,241,255,0.09);
-    --lime:#C6FF3D;
-    --lime-deep:#8FCB1F;
-    --magenta:#FF3DAE;
-    --text:#F3F1FF;
-    --muted:#8C89A6;
-    --ink:#0B0F08;
+  :root {
+    --bg: #07080e;
+    --surface: #10111a;
+    --surface-2: #181926;
+    --line: rgba(0, 255, 102, 0.12);
+    --rh-green: #00FF66; /* Vibrant Robinhood Neon Green */
+    --rh-green-dark: #004D1A;
+    --magenta: #FF3DAE;
+    --text: #F3F1FF;
+    --muted: #8481A0;
+    --ink: #040803;
+    --gold: #FFB800;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -34,74 +37,116 @@
   body::before{
     content:"";
     position:fixed; inset:0;
-    background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
-    pointer-events:none; z-index:9999; opacity:0.4;
+    background:repeating-linear-gradient(to bottom, rgba(0,255,102,0.015) 0px, rgba(0,255,102,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none; z-index:9999; opacity:0.5;
   }
   a{color:inherit; text-decoration:none;}
   .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
   .pill{ display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.5px; padding:7px 16px; border-radius:999px; }
-  .pill-outline{ border:1px solid var(--line); color:var(--muted); }
-  .pill-dark{ background:#12240A; color:var(--lime); border:1px solid rgba(198,255,61,0.25); text-transform:uppercase; }
+  .pill-outline{ border:1px solid var(--line); color:var(--muted); background: rgba(0, 255, 102, 0.03); }
+  .pill-dark{ background:#031A0B; color:var(--rh-green); border:1px solid rgba(0,255,102,0.25); text-transform:uppercase; }
 
   /* ---------- Header ---------- */
-  header{ position:sticky; top:0; z-index:100; background:rgba(11,11,18,0.75); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  header{ position:sticky; top:0; z-index:100; background:rgba(7,8,14,0.85); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
   nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
   .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; letter-spacing:0.5px; display:flex; align-items:center; gap:8px; }
-  .logo .dot{ width:8px; height:8px; background:var(--lime); border-radius:50%; box-shadow:0 0 12px var(--lime); }
+  .logo .dot{ width:10px; height:10px; background:var(--rh-green); border-radius:50%; box-shadow:0 0 12px var(--rh-green); }
   .navlinks{ display:flex; gap:30px; font-size:14px; color:var(--muted); }
   .navlinks a{ transition:color .2s; }
-  .navlinks a:hover{ color:var(--lime); }
+  .navlinks a:hover{ color:var(--rh-green); }
   .nav-right{ display:flex; align-items:center; gap:18px; }
-  .nav-login{ font-size:14px; color:var(--text); }
-  .nav-login:hover{ color:var(--lime); }
-  .nav-cta{ font-family:'JetBrains Mono', monospace; font-size:13px; padding:10px 20px; border:1px solid var(--lime); color:var(--lime); border-radius:999px; transition:all .2s; }
-  .nav-cta:hover{ background:var(--lime); color:var(--ink); }
+  .nav-login{ font-size:14px; color:var(--text); transition: color 0.2s; }
+  .nav-login:hover{ color:var(--rh-green); }
+  .nav-cta{ font-family:'JetBrains Mono', monospace; font-size:13px; padding:10px 20px; border:1px solid var(--rh-green); color:var(--rh-green); border-radius:999px; transition:all .2s; }
+  .nav-cta:hover{ background:var(--rh-green); color:var(--ink); box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
   @media (max-width:860px){ .navlinks{ display:none; } }
 
   /* ---------- Hero ---------- */
   .hero{ padding:80px 0 60px; }
   .hero-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
-  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
 
   h1.title{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(34px,4.6vw,54px); line-height:1.08; letter-spacing:-1px; }
-  h1.title .accent{ color:var(--lime); }
-  .subcopy{ max-width:460px; margin-top:20px; color:var(--muted); font-size:16px; line-height:1.65; }
+  h1.title .accent{ color:var(--rh-green); text-shadow: 0 0 20px rgba(0,255,102,0.15); }
+  .subcopy{ max-width:480px; margin-top:20px; color:var(--muted); font-size:16px; line-height:1.65; }
 
-  .hero-ctas{ display:flex; align-items:center; gap:18px; margin-top:32px; flex-wrap:wrap; }
-  .btn-primary{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px; padding:15px 28px; border-radius:999px; background:var(--lime); color:var(--ink); transition:all .2s; }
-  .btn-primary:hover{ box-shadow:0 0 24px rgba(198,255,61,0.5); transform:translateY(-2px); }
-  .btn-play{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text); }
-  .btn-play .circ{ width:36px; height:36px; border-radius:50%; background:#12240A; border:1px solid rgba(198,255,61,0.3); display:flex; align-items:center; justify-content:center; color:var(--lime); transition:transform .2s; }
+  /* Interactive Controls */
+  .control-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 24px;
+    max-width: 480px;
+  }
+  .control-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rh-green);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .input-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .input-row input {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .input-row input:focus {
+    border-color: var(--rh-green);
+  }
+
+  .hero-ctas{ display:flex; align-items:center; gap:18px; margin-top:24px; flex-wrap:wrap; }
+  .btn-primary{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px; padding:15px 28px; border-radius:999px; background:var(--rh-green); color:var(--ink); transition:all .2s; cursor: pointer; border: none; }
+  .btn-primary:hover{ box-shadow:0 0 24px rgba(0,255,102,0.5); transform:translateY(-2px); }
+  .btn-play{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text); cursor: pointer; }
+  .btn-play .circ{ width:36px; height:36px; border-radius:50%; background:#031A0B; border:1px solid rgba(0,255,102,0.3); display:flex; align-items:center; justify-content:center; color:var(--rh-green); transition:transform .2s; }
   .btn-play:hover .circ{ transform:scale(1.08); }
 
-  .hero-divider{ height:1px; background:var(--line); margin:34px 0 18px; max-width:460px; }
+  .hero-divider{ height:1px; background:var(--line); margin:30px 0 18px; max-width:480px; }
   .tag-rows{ display:flex; flex-direction:column; gap:10px; }
   .tag-row{ display:flex; gap:10px; flex-wrap:wrap; }
-  .tag-pill{ font-size:12.5px; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px; }
+  .tag-pill{ font-size:12.5px; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px; background: rgba(0,255,102,0.02); }
 
   /* Hero visual */
   .hero-visual{ position:relative; height:460px; display:flex; align-items:center; justify-content:center; }
-  .ring{ position:absolute; width:420px; height:420px; border-radius:50%; border:1px solid var(--line); }
-  .ring.r2{ width:320px; height:320px; }
+  .ring{ position:absolute; width:420px; height:420px; border-radius:50%; border:1px solid var(--line); opacity: 0.5; }
+  .ring.r2{ width:320px; height:320px; border:1px dashed var(--line); }
   @media (max-width:500px){ .ring{ width:300px; height:300px;} .ring.r2{ width:220px; height:220px; } }
 
-  .stats-card{ position:absolute; top:6%; left:0; width:150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 20px 40px -20px rgba(0,0,0,0.6); z-index:3; }
+  .stats-card{ position:absolute; top:6%; left:0; width:158px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 20px 40px -20px rgba(0,0,0,0.6); z-index:3; transition: transform 0.3s; }
+  .stats-card:hover { transform: translateY(-5px); }
   .stats-card .lbl{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
   .stats-bars{ display:flex; align-items:flex-end; gap:4px; height:44px; margin-top:10px; }
-  .stats-bars div{ flex:1; background:var(--lime); border-radius:2px; opacity:0.85; }
+  .stats-bars div{ flex:1; background:var(--rh-green); border-radius:2px; opacity:0.85; transition: height 0.3s ease; }
   .stats-card .num{ margin-top:10px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; }
-  .stats-card .num span{ color:var(--lime); font-size:11px; font-family:'JetBrains Mono', monospace; font-weight:400; margin-left:4px; }
+  .stats-card .num span{ color:var(--rh-green); font-size:11px; font-family:'JetBrains Mono', monospace; font-weight:400; margin-left:4px; }
 
   .card-token{
-    position:absolute; top:20%; right:2%; width:250px; padding:20px;
+    position:absolute; top:20%; right:2%; width:260px; padding:20px;
     border-radius:16px; z-index:2;
-    background:linear-gradient(135deg, #2E4A0E, #16240A);
-    border:1px solid rgba(198,255,61,0.2);
+    background:linear-gradient(135deg, #093316, #06190B);
+    border:1px solid rgba(0,255,102,0.25);
     box-shadow:0 25px 50px -20px rgba(0,0,0,0.7);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  .card-token .row-top{ display:flex; justify-content:space-between; align-items:center; color:var(--lime); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; }
-  .card-token .addr{ font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:1px; margin-top:22px; color:#E4F5C4; }
-  .card-token .meta{ display:flex; justify-content:space-between; margin-top:16px; font-size:10.5px; color:#A9C98A; }
+  .card-token:hover { transform: scale(1.03) rotate(1deg); }
+  .card-token .row-top{ display:flex; justify-content:space-between; align-items:center; color:var(--rh-green); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; }
+  .card-token .addr{ font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:1px; margin-top:22px; color:#C4F5D2; }
+  .card-token .meta{ display:flex; justify-content:space-between; margin-top:16px; font-size:10.5px; color:#8AC998; }
   .card-token .meta b{ display:block; color:var(--text); font-size:12px; margin-top:2px; }
 
   .card-art{
@@ -110,16 +155,18 @@
     background:linear-gradient(135deg, #1B1730, #100E1C);
     border:1px solid rgba(255,61,174,0.2);
     box-shadow:0 25px 50px -20px rgba(0,0,0,0.7);
+    transition: all 0.3s;
   }
+  .card-art:hover { transform: translateY(-3px); }
   .card-art .row-top{ display:flex; justify-content:space-between; align-items:center; color:var(--magenta); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; }
   .card-art .addr{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:1px; margin-top:22px; color:#E9DDF3; }
   .card-art .meta{ margin-top:16px; font-size:10.5px; color:#B7A6C9; }
   .card-art .meta b{ display:block; color:var(--text); font-size:12px; margin-top:2px; }
 
   .pill-float{ position:absolute; bottom:32%; right:6%; z-index:4; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:9px 16px; display:flex; align-items:center; gap:8px; font-size:12px; box-shadow:0 15px 30px -15px rgba(0,0,0,0.6); }
-  .pill-float .ico{ width:8px; height:8px; border-radius:50%; background:var(--lime); }
+  .pill-float .ico{ width:8px; height:8px; border-radius:50%; background:var(--rh-green); box-shadow: 0 0 8px var(--rh-green); }
 
-  .fab{ position:absolute; bottom:2%; right:18%; width:46px; height:46px; border-radius:50%; background:var(--lime); display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:18px; box-shadow:0 15px 30px -10px rgba(198,255,61,0.5); z-index:4; }
+  .fab{ position:absolute; bottom:2%; right:18%; width:46px; height:46px; border-radius:50%; background:var(--rh-green); display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:16px; font-weight: bold; box-shadow:0 15px 30px -10px rgba(0, 255, 102, 0.5); z-index:4; }
 
   @media (max-width:960px){
     .hero-visual{ height:400px; transform:scale(0.9); }
@@ -131,55 +178,81 @@
   /* ---------- Partners ---------- */
   .partners{ padding:50px 0 70px; border-top:1px solid var(--line); }
   .partners .lbl{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:28px; }
-  .partner-row{ display:flex; justify-content:center; align-items:center; gap:56px; flex-wrap:wrap; }
-  .partner-row span{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; color:var(--muted); opacity:0.7; letter-spacing:1px; }
+  .partner-row{ display:flex; justify-content:center; align-items:center; gap:48px; flex-wrap:wrap; }
+  .partner-row span{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; color:var(--muted); opacity:0.75; letter-spacing:1px; display:flex; align-items:center; gap:6px; transition: color 0.3s, opacity 0.3s; cursor: default; }
+  .partner-row span:hover { color: var(--rh-green); opacity: 1; }
 
   /* ---------- Features ---------- */
   .section{ padding:90px 0; border-top:1px solid var(--line); }
   .feat-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:30px; flex-wrap:wrap; }
-  .feat-top .side-note{ font-size:14px; color:var(--muted); max-width:220px; text-align:right; }
+  .feat-top .side-note{ font-size:14px; color:var(--muted); max-width:240px; text-align:right; }
   @media (max-width:700px){ .feat-top .side-note{ text-align:left; } }
 
   h2.feat-head{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(26px,3.6vw,38px); line-height:1.2; max-width:760px; margin-top:14px; }
-  h2.feat-head .hl-lime{ color:var(--lime); }
+  h2.feat-head .hl-lime{ color:var(--rh-green); text-shadow: 0 0 15px rgba(0,255,102,0.1); }
   h2.feat-head .hl-mag{ color:var(--magenta); }
 
   .feat-grid{ display:grid; grid-template-columns:1.1fr 1fr 1fr 1fr; gap:18px; margin-top:48px; }
   @media (max-width:960px){ .feat-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:600px){ .feat-grid{ grid-template-columns:1fr; } }
 
-  .fcell{ border-radius:16px; padding:26px; min-height:280px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; }
+  .fcell{ border-radius:16px; padding:26px; min-height:280px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; transition: transform 0.3s, border-color 0.3s; }
+  .fcell:hover { transform: translateY(-4px); }
   .fcell.dark{ background:var(--surface); border:1px solid var(--line); justify-content:center; align-items:center; }
-  .fcell.dark .glyph{ font-size:64px; }
+  .fcell.dark:hover { border-color: var(--rh-green); }
+  .fcell.dark .glyph{ font-size:64px; color: var(--rh-green); text-shadow: 0 0 15px rgba(0,255,102,0.3); }
   .fcell.dark .glyph-label{ margin-top:14px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); }
 
   .fcell.color{ color:var(--ink); }
   .fcell.color h3{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; line-height:1.25; }
-  .fcell.color p{ margin-top:10px; font-size:13.5px; line-height:1.55; opacity:0.75; max-width:220px; }
-  .fcell.c-lime{ background:var(--lime); }
-  .fcell.c-lime-deep{ background:var(--lime-deep); }
+  .fcell.color p{ margin-top:10px; font-size:13.5px; line-height:1.55; opacity:0.85; max-width:220px; }
+  .fcell.c-lime-deep{ background:linear-gradient(135deg, #00CC4F, #007D30); color: white; }
+  .fcell.c-lime{ background:linear-gradient(135deg, #00FF66, #00993D); color: var(--ink); }
   .fcell.c-magenta{ background:var(--magenta); color:#2B0A1D; }
-  .fcell::after{ content: attr(data-mark); position:absolute; right:12px; bottom:-6px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:110px; opacity:0.12; line-height:1; }
+  .fcell::after{ content: attr(data-mark); position:absolute; right:12px; bottom:-6px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:110px; opacity:0.1; line-height:1; pointer-events: none; }
 
-  /* ---------- CTA band ---------- */
-  .cta-band{ background:linear-gradient(120deg, #17240A, #0F1A06); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:90px 0; }
+  /* ---------- CTA band (Swapper Simulator) ---------- */
+  .cta-band{ background:linear-gradient(120deg, #031c0a, #010c05); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:90px 0; }
   .cta-grid{ display:grid; grid-template-columns:0.9fr 1fr; gap:60px; align-items:center; }
-  @media (max-width:900px){ .cta-grid{ grid-template-columns:1fr; } }
+  @media (max-width:900px){ .cta-grid{ grid-template-columns:1fr; gap:40px; } }
 
-  .balance-card{ background:#0B0B12; border-radius:20px; padding:30px; border:1px solid rgba(198,255,61,0.15); box-shadow:0 30px 70px -30px rgba(0,0,0,0.8); }
+  .balance-card{ background:#07080e; border-radius:20px; padding:30px; border:1px solid rgba(0,255,102,0.15); box-shadow:0 30px 70px -30px rgba(0,0,0,0.8); }
   .balance-top{ display:flex; justify-content:space-between; align-items:center; }
-  .chip{ font-size:11px; font-family:'JetBrains Mono', monospace; color:var(--muted); border:1px solid var(--line); padding:6px 12px; border-radius:999px; }
-  .balance-label{ margin-top:30px; font-size:12.5px; color:var(--muted); }
-  .balance-amount{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:38px; margin-top:8px; color:var(--lime); }
+  .chip{ font-size:11px; font-family:'JetBrains Mono', monospace; color:var(--muted); border:1px solid var(--line); padding:6px 12px; border-radius:999px; background: rgba(0,255,102,0.03); }
+  .balance-label{ margin-top:30px; font-size:12.5px; color:var(--muted); display: flex; justify-content: space-between; }
+  .balance-amount{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:38px; margin-top:8px; color:var(--rh-green); }
   .balance-actions{ display:flex; gap:10px; margin-top:26px; align-items:center; }
-  .bicon{ width:42px; height:42px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--text); }
-  .bbtn{ font-size:12.5px; font-family:'JetBrains Mono', monospace; padding:11px 18px; border:1px solid var(--line); border-radius:999px; color:var(--text); }
-  .bplus{ margin-left:auto; width:42px; height:42px; border-radius:50%; background:var(--lime); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; }
+  .bicon{ width:42px; height:42px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--text); transition: all 0.2s; cursor: pointer; }
+  .bicon:hover { border-color: var(--rh-green); color: var(--rh-green); }
+  .bbtn{ font-size:12.5px; font-family:'JetBrains Mono', monospace; padding:11px 18px; border:1px solid var(--line); border-radius:999px; color:var(--text); transition: all 0.2s; cursor: pointer; }
+  .bbtn:hover { background: rgba(0,255,102,0.05); border-color: var(--rh-green); }
+  .bplus{ margin-left:auto; width:42px; height:42px; border-radius:50%; background:var(--rh-green); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; cursor: pointer; transition: transform 0.2s; }
+  .bplus:hover { transform: scale(1.1); }
+
+  /* Interactive Logger Terminal */
+  .terminal-box {
+    background: #030407;
+    border: 1px solid rgba(0, 255, 102, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #a3c7ad;
+    max-height: 140px;
+    overflow-y: auto;
+  }
+  .terminal-box p {
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .terminal-box .green { color: var(--rh-green); }
+  .terminal-box .magenta { color: var(--magenta); }
 
   .steps-heading{ font-family:'Space Grotesk', sans-serif; font-size:clamp(26px,3.6vw,36px); font-weight:700; line-height:1.2; }
   .steps-list{ margin-top:30px; display:flex; flex-direction:column; gap:22px; }
   .step-row{ display:flex; gap:16px; align-items:flex-start; }
-  .step-ico{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:rgba(198,255,61,0.12); color:var(--lime); display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .step-ico{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:rgba(0, 255, 102, 0.12); color:var(--rh-green); display:flex; align-items:center; justify-content:center; font-size:15px; border: 1px solid rgba(0,255,102,0.2); }
   .step-row p{ color:var(--muted); font-size:15px; line-height:1.6; }
   .step-row p b{ color:var(--text); }
 
@@ -192,15 +265,54 @@
   .pt-cta{ margin-top:26px; display:inline-flex; }
 
   /* ---------- Final CTA + footer ---------- */
-  .cta-final{ text-align:center; padding:100px 24px; border-bottom:1px solid var(--line); }
+  .cta-final{ text-align:center; padding:100px 24px; border-bottom:1px solid var(--line); position: relative; overflow: hidden; }
   .cta-final h2{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(28px,4.6vw,46px); }
   .cta-final p{ color:var(--muted); margin:16px auto 32px; max-width:460px; }
 
   footer{ padding:34px 0; }
   .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
   .foot-links{ display:flex; gap:22px; font-size:13px; color:var(--muted); }
-  .foot-links a:hover{ color:var(--lime); }
+  .foot-links a:hover{ color:var(--rh-green); }
   .foot-copy{ font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace; }
+
+  /* Custom Toast Container */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #031A0B;
+    border: 2px solid var(--rh-green);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(120px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+  }
+  #toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  #toast .toast-icon {
+    background: var(--rh-green);
+    color: var(--ink);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+  #toast-text {
+    font-size: 13.5px;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
 
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
 </style>
@@ -214,11 +326,11 @@
       <a href="#create">Features</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
-      <a href="#market">Market</a>
+      <a href="#market">Ecosystem</a>
     </div>
     <div class="nav-right">
-      <a href="#" class="nav-login">Log in</a>
-      <a href="#launch" class="nav-cta">Get started</a>
+      <a href="#" class="nav-login" id="nav-login">Connect Wallet</a>
+      <a href="#launch" class="nav-cta" id="global-action">Get started</a>
     </div>
   </nav>
 </header>
@@ -226,25 +338,41 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1 class="title">Your control room for shipping on <span class="accent">Solana.</span></h1>
-      <p class="subcopy">Mint the token, pin the artwork, and watch it trade — all from one gamified dashboard built for people who ship on-chain daily.</p>
+      <span class="pill pill-outline" style="margin-bottom: 16px;"><i class="fa-solid fa-code-fork"></i> Robinhood Chain Layer-2</span>
+      <h1 class="title">Your control room for shipping on <span class="accent">Robinhood Chain.</span></h1>
+      <p class="subcopy">Mint custom native tokens, pin secure artwork, and monitor market trading velocities — all from one premium dashboard built for the next generation of finance.</p>
+
+      <!-- Token Sandbox playground -->
+      <div class="control-panel">
+        <div class="control-label">
+          <span>Live Token Customizer</span>
+          <span style="color: var(--muted)">Try editing below</span>
+        </div>
+        <div class="input-row">
+          <input type="text" id="token-ticker" value="HOODPUNK" maxlength="12" placeholder="Ticker Symbol">
+          <input type="text" id="token-supply" value="1,000,000" placeholder="Total Supply">
+        </div>
+        <div class="input-row">
+          <input type="text" id="mint-fee" value="0.05" placeholder="Mint Fee (RHC)">
+          <input type="text" id="artwork-pin" value="Rooty Vault" placeholder="Artwork Name">
+        </div>
+      </div>
 
       <div class="hero-ctas">
-        <a href="#launch" class="btn-primary">Launch a token</a>
+        <button id="launch-token-btn" class="btn-primary">Launch token now</button>
         <a href="#how" class="btn-play"><span class="circ">▶</span> Watch demo</a>
       </div>
 
       <div class="hero-divider"></div>
       <div class="tag-rows">
         <div class="tag-row">
-          <span class="tag-pill">Mint</span>
-          <span class="tag-pill">Deploy</span>
-          <span class="tag-pill">Grow</span>
+          <span class="tag-pill">Zero Gas Fees</span>
+          <span class="tag-pill">One-click Deploy</span>
+          <span class="tag-pill">Instant finality</span>
         </div>
         <div class="tag-row">
-          <span class="tag-pill">Design</span>
-          <span class="tag-pill">Pin Artwork</span>
-          <span class="tag-pill">Track Market</span>
+          <span class="tag-pill">Arweave Artwork Pinning</span>
+          <span class="tag-pill">Robinhood Wallet Sync</span>
         </div>
       </div>
     </div>
@@ -253,9 +381,10 @@
       <div class="ring"></div>
       <div class="ring r2"></div>
 
+      <!-- Holders live ticker panel -->
       <div class="stats-card">
         <div class="lbl">Holders</div>
-        <div class="stats-bars">
+        <div class="stats-bars" id="live-bars">
           <div style="height:30%"></div>
           <div style="height:55%"></div>
           <div style="height:40%"></div>
@@ -263,39 +392,41 @@
           <div style="height:60%"></div>
           <div style="height:100%"></div>
         </div>
-        <div class="num">2,140 <span>+18%</span></div>
+        <div class="num" id="live-holders-count">2,140 <span>+18%</span></div>
       </div>
 
-      <div class="card-token">
-        <div class="row-top"><span>SKIBIDIRIZZ</span><span>◎</span></div>
-        <div class="addr">7xKp…q9Fz</div>
+      <!-- Real-time Interactive Token Card -->
+      <div class="card-token" id="interactive-token-card">
+        <div class="row-top"><span id="preview-ticker">HOODPUNK</span><span style="color: var(--rh-green)"><i class="fa-solid fa-layer-group"></i></span></div>
+        <div class="addr" id="preview-address">rh_L2…9f8x</div>
         <div class="meta">
-          <div>Supply<b>1,000,000,000</b></div>
-          <div>Mint fee<b>0.02 ◎</b></div>
+          <div>Supply<b id="preview-supply">1,000,000</b></div>
+          <div>Mint fee<b id="preview-fee">0.05 RHC</b></div>
         </div>
       </div>
 
+      <!-- Real-time Interactive Artwork Card -->
       <div class="card-art">
-        <div class="row-top"><span>Rooty Vault</span><span>◆</span></div>
-        <div class="addr">ar://k3Nn…8pRq</div>
-        <div class="meta">Pinned permanently<b>Arweave</b></div>
+        <div class="row-top"><span id="preview-art-name">Rooty Vault</span><span style="color: var(--magenta)">⧉</span></div>
+        <div class="addr">ar://rh2a…7vWy</div>
+        <div class="meta">Pinned permanently<b>IPFS + Arweave</b></div>
       </div>
 
-      <div class="pill-float"><span class="ico"></span> Live on mainnet</div>
-      <div class="fab">◎</div>
+      <div class="pill-float"><span class="ico"></span> Active on Robinhood Chain</div>
+      <div class="fab">⧉</div>
     </div>
   </div>
 </section>
 
 <section class="partners">
   <div class="wrap">
-    <div class="lbl">Built on &amp; around</div>
+    <div class="lbl">Engineered directly around</div>
     <div class="partner-row">
-      <span>Solana</span>
-      <span>Phantom</span>
-      <span>Arweave</span>
-      <span>Metaplex</span>
-      <span>Birdeye</span>
+      <span><i class="fa-solid fa-wallet" style="font-size: 15px; color: var(--rh-green)"></i> Robinhood Wallet</span>
+      <span><i class="fa-solid fa-circle-nodes" style="font-size: 15px;"></i> Arbitrum L2</span>
+      <span><i class="fa-solid fa-server" style="font-size: 15px;"></i> Arweave Storage</span>
+      <span><i class="fa-solid fa-cubes" style="font-size: 15px;"></i> Metaplex Connect</span>
+      <span><i class="fa-solid fa-chart-line" style="font-size: 15px;"></i> Pyth Network Oracle</span>
     </div>
   </div>
 </section>
@@ -303,27 +434,27 @@
 <section class="section" id="create">
   <div class="wrap">
     <div class="feat-top">
-      <span class="pill pill-dark">Features</span>
-      <span class="side-note">Everything you need to launch, nothing you have to configure.</span>
+      <span class="pill pill-dark">Developer suite</span>
+      <span class="side-note">Everything you need to launch native financial nodes instantly.</span>
     </div>
-    <h2 class="feat-head">Ship with <span class="hl-lime">clarity</span> — mint, style, and track your token from a single <span class="hl-mag">dashboard</span>, no separate tools required.</h2>
+    <h2 class="feat-head">Launch on <span class="hl-lime">Robinhood Chain</span> — configure parameters, pin digital artwork, and scale liquidity within <span class="hl-mag">one clean pipeline</span>.</h2>
 
     <div class="feat-grid">
       <div class="fcell dark">
-        <div class="glyph">◎</div>
-        <div class="glyph-label">Deploy in ~4.2s</div>
+        <div class="glyph">⧉</div>
+        <div class="glyph-label">Settlement ~0.6s</div>
       </div>
       <div class="fcell color c-lime-deep" data-mark="$">
-        <h3>Automated Metadata &amp; Alerts</h3>
-        <p>Set your token's name, supply, and image once — get real-time alerts the moment it's live.</p>
+        <h3>Gasless Execution Routing</h3>
+        <p>Bypass premium fees. Execute token deployment commands over Robinhood L2 with minimal network processing overhead.</p>
       </div>
-      <div class="fcell color c-lime" data-mark="◎">
-        <h3>Unified Token Dashboard</h3>
-        <p>See mints, holders, and market activity for every token you've shipped, in one view.</p>
+      <div class="fcell color c-lime" data-mark="RHC">
+        <h3>Unified Portfolio Monitoring</h3>
+        <p>Track metrics, liquidity rates, and transfer channels for all your deployed tokens directly within Robinhood Wallet integrations.</p>
       </div>
       <div class="fcell color c-magenta" data-mark="◆">
-        <h3>Permanent Artwork Pinning</h3>
-        <p>Your art gets pushed to Arweave automatically — no broken links, ever.</p>
+        <h3>Permanent Metadata Pinning</h3>
+        <p>Digital artwork asset references are anchored automatically to decentralized web nodes. No dead links, guaranteed.</p>
       </div>
     </div>
   </div>
@@ -331,35 +462,46 @@
 
 <section class="cta-band" id="how">
   <div class="wrap cta-grid">
-    <div class="balance-card">
-      <div class="balance-top">
-        <span class="chip">◎ SOL</span>
-        <span class="chip">👁</span>
+    <div>
+      <div class="balance-card">
+        <div class="balance-top">
+          <span class="chip"><i class="fa-solid fa-bolt" style="color: var(--rh-green)"></i> RHC COIN</span>
+          <span class="chip">Live Network State</span>
+        </div>
+        <div class="balance-label">
+          <span>Active Sandbox Balance</span>
+          <span style="color: var(--rh-green)">Connected</span>
+        </div>
+        <div class="balance-amount" id="interactive-balance">250.00 RHC</div>
+        <div class="balance-actions">
+          <span class="bicon" id="balance-info-btn"><i class="fa-solid fa-circle-question"></i></span>
+          <span class="bbtn" id="faucet-request-btn">Request Testnet Coins</span>
+          <span class="bbtn" id="balance-reset-btn">Reset</span>
+          <span class="bplus" id="balance-add-btn">+</span>
+        </div>
       </div>
-      <div class="balance-label">Available token balance</div>
-      <div class="balance-amount">◎ 128.42</div>
-      <div class="balance-actions">
-        <span class="bicon">⠿</span>
-        <span class="bbtn">↓ Request</span>
-        <span class="bbtn">↑ Send</span>
-        <span class="bplus">+</span>
+
+      <!-- Interactive terminal logger simulator -->
+      <div class="terminal-box" id="terminal-console">
+        <p class="green">[SYSTEM] Rooty/Market environment initialized over Robinhood Chain L2.</p>
+        <p>[SYSTEM] Ready for deployment simulation inputs...</p>
       </div>
     </div>
 
     <div>
-      <div class="steps-heading">Launch your token in 3 easy steps</div>
+      <div class="steps-heading">Deploy tokens to Robinhood Chain in 3 steps</div>
       <div class="steps-list">
         <div class="step-row">
-          <span class="step-ico">①</span>
-          <p><b>Name it.</b> Pick a ticker, a name, and a supply — Rooty checks availability on Solana in real time.</p>
+          <span class="step-ico">1</span>
+          <p><b>Define Tokenomics.</b> Setup ticker symbols, cap parameters, and total supply values inside Rooty's clean control board panel.</p>
         </div>
         <div class="step-row">
-          <span class="step-ico">②</span>
-          <p><b>Skin it.</b> Upload or generate the artwork in the gamified editor; it's pinned to Arweave automatically.</p>
+          <span class="step-ico">2</span>
+          <p><b>Secure Asset Media.</b> Upload your conceptual artwork; Metaplex integrations pin details automatically to Arweave metadata pipelines.</p>
         </div>
         <div class="step-row">
-          <span class="step-ico">③</span>
-          <p><b>Launch it.</b> Confirm in your wallet — your token and its market page go live immediately.</p>
+          <span class="step-ico">3</span>
+          <p><b>Broadcast Deployment.</b> Approve through your sync'd Robinhood Wallet — final state settlements resolve on Robinhood Chain instantly.</p>
         </div>
       </div>
     </div>
@@ -369,19 +511,19 @@
 <section class="pricing-teaser" id="pricing">
   <div class="wrap">
     <div class="pt-top">
-      <span class="pill pill-dark">Pricing</span>
-      <span class="side-note">Free to start, upgrade only if you outgrow it.</span>
+      <span class="pill pill-dark">Consensus fee scale</span>
+      <span class="side-note">Zero developer subscription fees. Only pay network execution values.</span>
     </div>
-    <p class="pt-body">Every wallet gets unlimited token deploys on the free tier — you only ever pay Solana's own network fee, around <b>0.02 ◎</b> per mint. Pro unlocks priority indexing, custom market pages, and early access to new artwork tools.</p>
-    <a href="#launch" class="btn-primary pt-cta">See pricing</a>
+    <p class="pt-body">Every connected wallet gets limitless smart-contract drafts. Deployment registers only Solana-equivalent micro-gas fees — averaging roughly <b>0.05 RHC</b> per token mint. Pro licenses unlock custom market pages, webhook updates, and priority network execution streams.</p>
+    <button id="pricing-cta" class="btn-primary pt-cta">Explore Pro Tier</button>
   </div>
 </section>
 
-<section class="cta-final" id="market">
-  <div class="pill pill-dark" style="margin-bottom:18px;">Ready when you are</div>
-  <h2>Your token is one command away.</h2>
-  <p>Connect a wallet, name your idea, and Rooty handles deployment, artwork, and the market page it lives on.</p>
-  <a href="#launch" class="btn-primary">Launch a token</a>
+<section class="cta-final" id="launch">
+  <div class="pill pill-dark" style="margin-bottom:18px;">Zero barriers to entry</div>
+  <h2>Your next token is one transaction away.</h2>
+  <p>Connect your Robinhood Wallet, parameters configuration, and let Rooty take care of the heavy-lifting settlement pipeline.</p>
+  <button id="final-cta-btn" class="btn-primary">Connect Wallet &amp; Launch</button>
 </section>
 
 <footer>
@@ -392,9 +534,244 @@
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
     </div>
-    <div class="foot-copy">© 2026 ROOTY MARKET — built on Solana</div>
+    <div class="foot-copy">© 2026 ROOTY MARKET — Integrated with Robinhood Chain</div>
   </div>
 </footer>
 
+<!-- Custom Toast Pop-up -->
+<div id="toast">
+  <div class="toast-icon"><i class="fa-solid fa-check"></i></div>
+  <div id="toast-text">Transaction successfully broadcasted!</div>
+</div>
+
+<script>
+  // Dynamic State Elements
+  let walletConnected = false;
+  let testnetBalance = 250.00;
+  let addressIndex = 0;
+
+  // DOM Elements - Form Fields
+  const tokenTickerInput = document.getElementById('token-ticker');
+  const tokenSupplyInput = document.getElementById('token-supply');
+  const mintFeeInput = document.getElementById('mint-fee');
+  const artworkPinInput = document.getElementById('artwork-pin');
+
+  // DOM Elements - Live Card Previews
+  const previewTicker = document.getElementById('preview-ticker');
+  const previewSupply = document.getElementById('preview-supply');
+  const previewFee = document.getElementById('preview-fee');
+  const previewArtName = document.getElementById('preview-art-name');
+  const previewAddress = document.getElementById('preview-address');
+
+  // Interactive Live Input Updates
+  tokenTickerInput.addEventListener('input', (e) => {
+    let rawVal = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    e.target.value = rawVal;
+    previewTicker.innerText = rawVal || "TICKER";
+  });
+
+  tokenSupplyInput.addEventListener('input', (e) => {
+    previewSupply.innerText = e.target.value || "0";
+  });
+
+  mintFeeInput.addEventListener('input', (e) => {
+    let rawVal = e.target.value;
+    previewFee.innerText = rawVal ? `${rawVal} RHC` : "0.00 RHC";
+  });
+
+  artworkPinInput.addEventListener('input', (e) => {
+    previewArtName.innerText = e.target.value || "Artwork Pinned";
+  });
+
+  // --- Live Toast Notifications System ---
+  function showCustomToast(message, isGreen = true) {
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+    const toastIcon = toast.querySelector('.toast-icon');
+
+    toastText.innerText = message;
+    if (isGreen) {
+      toast.style.borderColor = 'var(--rh-green)';
+      toast.style.background = '#031A0B';
+      toastIcon.style.background = 'var(--rh-green)';
+      toastIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+    } else {
+      toast.style.borderColor = 'var(--magenta)';
+      toast.style.background = '#210515';
+      toastIcon.style.background = 'var(--magenta)';
+      toastIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+    }
+
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  // --- Simulator Logger System ---
+  const terminalConsole = document.getElementById('terminal-console');
+  function logTerminal(message, type = 'normal') {
+    const p = document.createElement('p');
+    p.innerText = `[${new Date().toLocaleTimeString()}] ${message}`;
+    if (type === 'green') p.className = 'green';
+    if (type === 'magenta') p.className = 'magenta';
+    terminalConsole.appendChild(p);
+    terminalConsole.scrollTop = terminalConsole.scrollHeight;
+  }
+
+  // --- Connect Wallet Actions ---
+  const navLogin = document.getElementById('nav-login');
+  const finalCtaBtn = document.getElementById('final-cta-btn');
+
+  function handleWalletConnect() {
+    if (!walletConnected) {
+      walletConnected = true;
+      navLogin.innerText = "rh_0x8f2d...4k9a";
+      navLogin.style.color = "var(--rh-green)";
+      finalCtaBtn.innerText = "Launch token now";
+      logTerminal("Robinhood Wallet connection authorized successfully.", "green");
+      showCustomToast("Robinhood Wallet Connected!");
+    } else {
+      walletConnected = false;
+      navLogin.innerText = "Connect Wallet";
+      navLogin.style.color = "var(--text)";
+      finalCtaBtn.innerText = "Connect Wallet & Launch";
+      logTerminal("Robinhood Wallet disconnected.");
+      showCustomToast("Wallet disconnected.", false);
+    }
+  }
+  navLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    handleWalletConnect();
+  });
+  finalCtaBtn.addEventListener('click', () => {
+    if (!walletConnected) {
+      handleWalletConnect();
+    } else {
+      triggerLaunchSimulator();
+    }
+  });
+
+  // --- Dynamic Holders Incrementor ---
+  const liveBars = document.getElementById('live-bars');
+  const liveHoldersCount = document.getElementById('live-holders-count');
+  let currentHolders = 2140;
+
+  setInterval(() => {
+    // Ticker holders deviance count
+    if (Math.random() > 0.6) {
+      const increment = Math.floor(Math.random() * 5) + 1;
+      currentHolders += increment;
+      liveHoldersCount.innerHTML = `${currentHolders.toLocaleString()} <span>+18%</span>`;
+      
+      // randomize height values of bars to simulate action
+      const bars = liveBars.querySelectorAll('div');
+      bars.forEach(bar => {
+        bar.style.height = `${Math.floor(Math.random() * 80) + 20}%`;
+      });
+    }
+  }, 3500);
+
+  // --- Token Launch Simulator Logic ---
+  const launchBtn = document.getElementById('launch-token-btn');
+  
+  function triggerLaunchSimulator() {
+    const ticker = tokenTickerInput.value || "HOODPUNK";
+    const supply = tokenSupplyInput.value || "1,000,000";
+    const fee = parseFloat(mintFeeInput.value) || 0.05;
+
+    if (testnetBalance < fee) {
+      logTerminal(`FAILED: Insufficient balance. Minting costs ${fee} RHC. Your balance: ${testnetBalance} RHC`, "magenta");
+      showCustomToast("Error: Insufficient testnet RHC balance!", false);
+      return;
+    }
+
+    launchBtn.disabled = true;
+    launchBtn.style.opacity = "0.7";
+    launchBtn.innerText = "Broadcasting contract...";
+
+    logTerminal(`Compiling contract configuration for $${ticker}...`);
+    
+    setTimeout(() => {
+      logTerminal(`Pinning media assets to Arweave node clusters...`);
+      
+      setTimeout(() => {
+        // Generate pseudo-random mock address
+        const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz123456789';
+        let customAddr = 'rh_L2';
+        for (let i = 0; i < 8; i++) {
+          customAddr += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        
+        // Deduct balance simulated values
+        testnetBalance -= fee;
+        document.getElementById('interactive-balance').innerText = `${testnetBalance.toFixed(2)} RHC`;
+        
+        // Update live visual output cards
+        previewAddress.innerText = customAddr;
+        
+        logTerminal(`BROADCASTED SUCCESS: Created contract ${customAddr} on Robinhood Chain L2!`, "green");
+        logTerminal(`Settled gas: ${fee} RHC. Permanent indexer sync is live.`, "green");
+
+        showCustomToast(`Successfully deployed $${ticker}!`);
+
+        launchBtn.disabled = false;
+        launchBtn.style.opacity = "1";
+        launchBtn.innerText = "Launch token now";
+      }, 1500);
+
+    }, 1500);
+  }
+
+  launchBtn.addEventListener('click', () => {
+    if (!walletConnected) {
+      logTerminal("WARNING: Please connect a simulated wallet to launch native nodes.", "magenta");
+      showCustomToast("Please connect Robinhood Wallet first!", false);
+      return;
+    }
+    triggerLaunchSimulator();
+  });
+
+  // --- Interactive Wallet Balance Sandbox Commands ---
+  const faucetBtn = document.getElementById('faucet-request-btn');
+  const addBtn = document.getElementById('balance-add-btn');
+  const resetBtn = document.getElementById('balance-reset-btn');
+  const infoBtn = document.getElementById('balance-info-btn');
+
+  faucetBtn.addEventListener('click', () => {
+    testnetBalance += 100.00;
+    document.getElementById('interactive-balance').innerText = `${testnetBalance.toFixed(2)} RHC`;
+    logTerminal("Faucet processed: Claimed 100.00 testnet RHC coins.", "green");
+    showCustomToast("100.00 testnet RHC received!");
+  });
+
+  addBtn.addEventListener('click', () => {
+    testnetBalance += 10.00;
+    document.getElementById('interactive-balance').innerText = `${testnetBalance.toFixed(2)} RHC`;
+    logTerminal("Added 10.00 RHC to active sandbox balance.");
+  });
+
+  resetBtn.addEventListener('click', () => {
+    testnetBalance = 250.00;
+    document.getElementById('interactive-balance').innerText = `${testnetBalance.toFixed(2)} RHC`;
+    logTerminal("Sandbox parameters reset back to default 250.00 RHC.");
+    showCustomToast("Balance reset complete.");
+  });
+
+  infoBtn.addEventListener('click', () => {
+    logTerminal("INFO: RHC is the native utility token of Robinhood L2 dev ecosystem.");
+  });
+
+  document.getElementById('pricing-cta').addEventListener('click', () => {
+    showCustomToast("Robinhood Chain Pro tier subscription updated!");
+    logTerminal("Account upgraded to Pro indexing tiers.", "green");
+  });
+
+  document.getElementById('global-action').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('.control-panel').scrollIntoView({ behavior: 'smooth' });
+    showCustomToast("Use the live customizer to build your token parameters!");
+  });
+</script>
 </body>
 </html>
