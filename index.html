@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<title>Rooty | MARKET</title>
+<meta name="description" content="Your control room for shipping tokens and artwork on Solana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B12;
+    --surface:#16151F;
+    --surface-2:#1D1C29;
+    --line: rgba(243,241,255,0.09);
+    --lime:#C6FF3D;
+    --lime-deep:#8FCB1F;
+    --magenta:#FF3DAE;
+    --text:#F3F1FF;
+    --muted:#8C89A6;
+    --ink:#0B0F08;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px);
+    pointer-events:none; z-index:9999; opacity:0.4;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .pill{ display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.5px; padding:7px 16px; border-radius:999px; }
+  .pill-outline{ border:1px solid var(--line); color:var(--muted); }
+  .pill-dark{ background:#12240A; color:var(--lime); border:1px solid rgba(198,255,61,0.25); text-transform:uppercase; }
+
+  /* ---------- Header ---------- */
+  header{ position:sticky; top:0; z-index:100; background:rgba(11,11,18,0.75); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:76px; }
+  .logo{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:22px; letter-spacing:0.5px; display:flex; align-items:center; gap:8px; }
+  .logo .dot{ width:8px; height:8px; background:var(--lime); border-radius:50%; box-shadow:0 0 12px var(--lime); }
+  .navlinks{ display:flex; gap:30px; font-size:14px; color:var(--muted); }
+  .navlinks a{ transition:color .2s; }
+  .navlinks a:hover{ color:var(--lime); }
+  .nav-right{ display:flex; align-items:center; gap:18px; }
+  .nav-login{ font-size:14px; color:var(--text); }
+  .nav-login:hover{ color:var(--lime); }
+  .nav-cta{ font-family:'JetBrains Mono', monospace; font-size:13px; padding:10px 20px; border:1px solid var(--lime); color:var(--lime); border-radius:999px; transition:all .2s; }
+  .nav-cta:hover{ background:var(--lime); color:var(--ink); }
+  @media (max-width:860px){ .navlinks{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding:80px 0 60px; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  h1.title{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(34px,4.6vw,54px); line-height:1.08; letter-spacing:-1px; }
+  h1.title .accent{ color:var(--lime); }
+  .subcopy{ max-width:460px; margin-top:20px; color:var(--muted); font-size:16px; line-height:1.65; }
+
+  .hero-ctas{ display:flex; align-items:center; gap:18px; margin-top:32px; flex-wrap:wrap; }
+  .btn-primary{ font-family:'JetBrains Mono', monospace; font-weight:700; font-size:14px; padding:15px 28px; border-radius:999px; background:var(--lime); color:var(--ink); transition:all .2s; }
+  .btn-primary:hover{ box-shadow:0 0 24px rgba(198,255,61,0.5); transform:translateY(-2px); }
+  .btn-play{ display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text); }
+  .btn-play .circ{ width:36px; height:36px; border-radius:50%; background:#12240A; border:1px solid rgba(198,255,61,0.3); display:flex; align-items:center; justify-content:center; color:var(--lime); transition:transform .2s; }
+  .btn-play:hover .circ{ transform:scale(1.08); }
+
+  .hero-divider{ height:1px; background:var(--line); margin:34px 0 18px; max-width:460px; }
+  .tag-rows{ display:flex; flex-direction:column; gap:10px; }
+  .tag-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .tag-pill{ font-size:12.5px; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px; }
+
+  /* Hero visual */
+  .hero-visual{ position:relative; height:460px; display:flex; align-items:center; justify-content:center; }
+  .ring{ position:absolute; width:420px; height:420px; border-radius:50%; border:1px solid var(--line); }
+  .ring.r2{ width:320px; height:320px; }
+  @media (max-width:500px){ .ring{ width:300px; height:300px;} .ring.r2{ width:220px; height:220px; } }
+
+  .stats-card{ position:absolute; top:6%; left:0; width:150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 20px 40px -20px rgba(0,0,0,0.6); z-index:3; }
+  .stats-card .lbl{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .stats-bars{ display:flex; align-items:flex-end; gap:4px; height:44px; margin-top:10px; }
+  .stats-bars div{ flex:1; background:var(--lime); border-radius:2px; opacity:0.85; }
+  .stats-card .num{ margin-top:10px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:16px; }
+  .stats-card .num span{ color:var(--lime); font-size:11px; font-family:'JetBrains Mono', monospace; font-weight:400; margin-left:4px; }
+
+  .card-token{
+    position:absolute; top:20%; right:2%; width:250px; padding:20px;
+    border-radius:16px; z-index:2;
+    background:linear-gradient(135deg, #2E4A0E, #16240A);
+    border:1px solid rgba(198,255,61,0.2);
+    box-shadow:0 25px 50px -20px rgba(0,0,0,0.7);
+  }
+  .card-token .row-top{ display:flex; justify-content:space-between; align-items:center; color:var(--lime); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; }
+  .card-token .addr{ font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:1px; margin-top:22px; color:#E4F5C4; }
+  .card-token .meta{ display:flex; justify-content:space-between; margin-top:16px; font-size:10.5px; color:#A9C98A; }
+  .card-token .meta b{ display:block; color:var(--text); font-size:12px; margin-top:2px; }
+
+  .card-art{
+    position:absolute; bottom:6%; left:8%; width:230px; padding:20px;
+    border-radius:16px; z-index:1;
+    background:linear-gradient(135deg, #1B1730, #100E1C);
+    border:1px solid rgba(255,61,174,0.2);
+    box-shadow:0 25px 50px -20px rgba(0,0,0,0.7);
+  }
+  .card-art .row-top{ display:flex; justify-content:space-between; align-items:center; color:var(--magenta); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:14px; }
+  .card-art .addr{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:1px; margin-top:22px; color:#E9DDF3; }
+  .card-art .meta{ margin-top:16px; font-size:10.5px; color:#B7A6C9; }
+  .card-art .meta b{ display:block; color:var(--text); font-size:12px; margin-top:2px; }
+
+  .pill-float{ position:absolute; bottom:32%; right:6%; z-index:4; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:9px 16px; display:flex; align-items:center; gap:8px; font-size:12px; box-shadow:0 15px 30px -15px rgba(0,0,0,0.6); }
+  .pill-float .ico{ width:8px; height:8px; border-radius:50%; background:var(--lime); }
+
+  .fab{ position:absolute; bottom:2%; right:18%; width:46px; height:46px; border-radius:50%; background:var(--lime); display:flex; align-items:center; justify-content:center; color:var(--ink); font-size:18px; box-shadow:0 15px 30px -10px rgba(198,255,61,0.5); z-index:4; }
+
+  @media (max-width:960px){
+    .hero-visual{ height:400px; transform:scale(0.9); }
+  }
+  @media (max-width:600px){
+    .hero-visual{ height:360px; transform:scale(0.78); }
+  }
+
+  /* ---------- Partners ---------- */
+  .partners{ padding:50px 0 70px; border-top:1px solid var(--line); }
+  .partners .lbl{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:28px; }
+  .partner-row{ display:flex; justify-content:center; align-items:center; gap:56px; flex-wrap:wrap; }
+  .partner-row span{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:20px; color:var(--muted); opacity:0.7; letter-spacing:1px; }
+
+  /* ---------- Features ---------- */
+  .section{ padding:90px 0; border-top:1px solid var(--line); }
+  .feat-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:30px; flex-wrap:wrap; }
+  .feat-top .side-note{ font-size:14px; color:var(--muted); max-width:220px; text-align:right; }
+  @media (max-width:700px){ .feat-top .side-note{ text-align:left; } }
+
+  h2.feat-head{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(26px,3.6vw,38px); line-height:1.2; max-width:760px; margin-top:14px; }
+  h2.feat-head .hl-lime{ color:var(--lime); }
+  h2.feat-head .hl-mag{ color:var(--magenta); }
+
+  .feat-grid{ display:grid; grid-template-columns:1.1fr 1fr 1fr 1fr; gap:18px; margin-top:48px; }
+  @media (max-width:960px){ .feat-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .feat-grid{ grid-template-columns:1fr; } }
+
+  .fcell{ border-radius:16px; padding:26px; min-height:280px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; overflow:hidden; }
+  .fcell.dark{ background:var(--surface); border:1px solid var(--line); justify-content:center; align-items:center; }
+  .fcell.dark .glyph{ font-size:64px; }
+  .fcell.dark .glyph-label{ margin-top:14px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--muted); }
+
+  .fcell.color{ color:var(--ink); }
+  .fcell.color h3{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; line-height:1.25; }
+  .fcell.color p{ margin-top:10px; font-size:13.5px; line-height:1.55; opacity:0.75; max-width:220px; }
+  .fcell.c-lime{ background:var(--lime); }
+  .fcell.c-lime-deep{ background:var(--lime-deep); }
+  .fcell.c-magenta{ background:var(--magenta); color:#2B0A1D; }
+  .fcell::after{ content: attr(data-mark); position:absolute; right:12px; bottom:-6px; font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:110px; opacity:0.12; line-height:1; }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{ background:linear-gradient(120deg, #17240A, #0F1A06); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:90px 0; }
+  .cta-grid{ display:grid; grid-template-columns:0.9fr 1fr; gap:60px; align-items:center; }
+  @media (max-width:900px){ .cta-grid{ grid-template-columns:1fr; } }
+
+  .balance-card{ background:#0B0B12; border-radius:20px; padding:30px; border:1px solid rgba(198,255,61,0.15); box-shadow:0 30px 70px -30px rgba(0,0,0,0.8); }
+  .balance-top{ display:flex; justify-content:space-between; align-items:center; }
+  .chip{ font-size:11px; font-family:'JetBrains Mono', monospace; color:var(--muted); border:1px solid var(--line); padding:6px 12px; border-radius:999px; }
+  .balance-label{ margin-top:30px; font-size:12.5px; color:var(--muted); }
+  .balance-amount{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:38px; margin-top:8px; color:var(--lime); }
+  .balance-actions{ display:flex; gap:10px; margin-top:26px; align-items:center; }
+  .bicon{ width:42px; height:42px; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:16px; color:var(--text); }
+  .bbtn{ font-size:12.5px; font-family:'JetBrains Mono', monospace; padding:11px 18px; border:1px solid var(--line); border-radius:999px; color:var(--text); }
+  .bplus{ margin-left:auto; width:42px; height:42px; border-radius:50%; background:var(--lime); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; }
+
+  .steps-heading{ font-family:'Space Grotesk', sans-serif; font-size:clamp(26px,3.6vw,36px); font-weight:700; line-height:1.2; }
+  .steps-list{ margin-top:30px; display:flex; flex-direction:column; gap:22px; }
+  .step-row{ display:flex; gap:16px; align-items:flex-start; }
+  .step-ico{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:rgba(198,255,61,0.12); color:var(--lime); display:flex; align-items:center; justify-content:center; font-size:15px; }
+  .step-row p{ color:var(--muted); font-size:15px; line-height:1.6; }
+  .step-row p b{ color:var(--text); }
+
+  /* ---------- Pricing teaser ---------- */
+  .pricing-teaser{ padding:90px 0; border-bottom:1px solid var(--line); }
+  .pt-top{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; }
+  .pt-top .side-note{ font-size:14px; color:var(--muted); }
+  .pt-body{ margin-top:26px; max-width:620px; color:var(--muted); font-size:16px; line-height:1.7; }
+  .pt-body b{ color:var(--text); }
+  .pt-cta{ margin-top:26px; display:inline-flex; }
+
+  /* ---------- Final CTA + footer ---------- */
+  .cta-final{ text-align:center; padding:100px 24px; border-bottom:1px solid var(--line); }
+  .cta-final h2{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:clamp(28px,4.6vw,46px); }
+  .cta-final p{ color:var(--muted); margin:16px auto 32px; max-width:460px; }
+
+  footer{ padding:34px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .foot-links{ display:flex; gap:22px; font-size:13px; color:var(--muted); }
+  .foot-links a:hover{ color:var(--lime); }
+  .foot-copy{ font-size:12px; color:var(--muted); font-family:'JetBrains Mono', monospace; }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo"><span class="dot"></span>Rooty<span style="color:var(--muted); font-weight:400;">/market</span></div>
+    <div class="navlinks">
+      <a href="#create">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#market">Market</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-login">Log in</a>
+      <a href="#launch" class="nav-cta">Get started</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="title">Your control room for shipping on <span class="accent">Solana.</span></h1>
+      <p class="subcopy">Mint the token, pin the artwork, and watch it trade — all from one gamified dashboard built for people who ship on-chain daily.</p>
+
+      <div class="hero-ctas">
+        <a href="#launch" class="btn-primary">Launch a token</a>
+        <a href="#how" class="btn-play"><span class="circ">▶</span> Watch demo</a>
+      </div>
+
+      <div class="hero-divider"></div>
+      <div class="tag-rows">
+        <div class="tag-row">
+          <span class="tag-pill">Mint</span>
+          <span class="tag-pill">Deploy</span>
+          <span class="tag-pill">Grow</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-pill">Design</span>
+          <span class="tag-pill">Pin Artwork</span>
+          <span class="tag-pill">Track Market</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="ring"></div>
+      <div class="ring r2"></div>
+
+      <div class="stats-card">
+        <div class="lbl">Holders</div>
+        <div class="stats-bars">
+          <div style="height:30%"></div>
+          <div style="height:55%"></div>
+          <div style="height:40%"></div>
+          <div style="height:80%"></div>
+          <div style="height:60%"></div>
+          <div style="height:100%"></div>
+        </div>
+        <div class="num">2,140 <span>+18%</span></div>
+      </div>
+
+      <div class="card-token">
+        <div class="row-top"><span>SKIBIDIRIZZ</span><span>◎</span></div>
+        <div class="addr">7xKp…q9Fz</div>
+        <div class="meta">
+          <div>Supply<b>1,000,000,000</b></div>
+          <div>Mint fee<b>0.02 ◎</b></div>
+        </div>
+      </div>
+
+      <div class="card-art">
+        <div class="row-top"><span>Rooty Vault</span><span>◆</span></div>
+        <div class="addr">ar://k3Nn…8pRq</div>
+        <div class="meta">Pinned permanently<b>Arweave</b></div>
+      </div>
+
+      <div class="pill-float"><span class="ico"></span> Live on mainnet</div>
+      <div class="fab">◎</div>
+    </div>
+  </div>
+</section>
+
+<section class="partners">
+  <div class="wrap">
+    <div class="lbl">Built on &amp; around</div>
+    <div class="partner-row">
+      <span>Solana</span>
+      <span>Phantom</span>
+      <span>Arweave</span>
+      <span>Metaplex</span>
+      <span>Birdeye</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="create">
+  <div class="wrap">
+    <div class="feat-top">
+      <span class="pill pill-dark">Features</span>
+      <span class="side-note">Everything you need to launch, nothing you have to configure.</span>
+    </div>
+    <h2 class="feat-head">Ship with <span class="hl-lime">clarity</span> — mint, style, and track your token from a single <span class="hl-mag">dashboard</span>, no separate tools required.</h2>
+
+    <div class="feat-grid">
+      <div class="fcell dark">
+        <div class="glyph">◎</div>
+        <div class="glyph-label">Deploy in ~4.2s</div>
+      </div>
+      <div class="fcell color c-lime-deep" data-mark="$">
+        <h3>Automated Metadata &amp; Alerts</h3>
+        <p>Set your token's name, supply, and image once — get real-time alerts the moment it's live.</p>
+      </div>
+      <div class="fcell color c-lime" data-mark="◎">
+        <h3>Unified Token Dashboard</h3>
+        <p>See mints, holders, and market activity for every token you've shipped, in one view.</p>
+      </div>
+      <div class="fcell color c-magenta" data-mark="◆">
+        <h3>Permanent Artwork Pinning</h3>
+        <p>Your art gets pushed to Arweave automatically — no broken links, ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="how">
+  <div class="wrap cta-grid">
+    <div class="balance-card">
+      <div class="balance-top">
+        <span class="chip">◎ SOL</span>
+        <span class="chip">👁</span>
+      </div>
+      <div class="balance-label">Available token balance</div>
+      <div class="balance-amount">◎ 128.42</div>
+      <div class="balance-actions">
+        <span class="bicon">⠿</span>
+        <span class="bbtn">↓ Request</span>
+        <span class="bbtn">↑ Send</span>
+        <span class="bplus">+</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="steps-heading">Launch your token in 3 easy steps</div>
+      <div class="steps-list">
+        <div class="step-row">
+          <span class="step-ico">①</span>
+          <p><b>Name it.</b> Pick a ticker, a name, and a supply — Rooty checks availability on Solana in real time.</p>
+        </div>
+        <div class="step-row">
+          <span class="step-ico">②</span>
+          <p><b>Skin it.</b> Upload or generate the artwork in the gamified editor; it's pinned to Arweave automatically.</p>
+        </div>
+        <div class="step-row">
+          <span class="step-ico">③</span>
+          <p><b>Launch it.</b> Confirm in your wallet — your token and its market page go live immediately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing-teaser" id="pricing">
+  <div class="wrap">
+    <div class="pt-top">
+      <span class="pill pill-dark">Pricing</span>
+      <span class="side-note">Free to start, upgrade only if you outgrow it.</span>
+    </div>
+    <p class="pt-body">Every wallet gets unlimited token deploys on the free tier — you only ever pay Solana's own network fee, around <b>0.02 ◎</b> per mint. Pro unlocks priority indexing, custom market pages, and early access to new artwork tools.</p>
+    <a href="#launch" class="btn-primary pt-cta">See pricing</a>
+  </div>
+</section>
+
+<section class="cta-final" id="market">
+  <div class="pill pill-dark" style="margin-bottom:18px;">Ready when you are</div>
+  <h2>Your token is one command away.</h2>
+  <p>Connect a wallet, name your idea, and Rooty handles deployment, artwork, and the market page it lives on.</p>
+  <a href="#launch" class="btn-primary">Launch a token</a>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="logo"><span class="dot"></span>Rooty<span style="color:var(--muted); font-weight:400;">/market</span></div>
+    <div class="foot-links">
+      <a href="#create">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="foot-copy">© 2026 ROOTY MARKET — built on Solana</div>
+  </div>
+</footer>
+
+</body>
+</html>
